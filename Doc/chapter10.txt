@@ -1,0 +1,7 @@
+第10章 定位布局
+
+10.1 深入定位
+	“position:absolute”会将元素转换为块元素。
+	
+10.2 z-index属性	
+	默认情况下，元素的z-index属性处于不激活状态。也就是说默认情况下，设置元素的z-index属性无效。z-index属性只有在元素定义“position:relative”“position:absolute”或者“position:fixed”时才会被激活。

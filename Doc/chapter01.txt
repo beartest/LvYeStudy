@@ -1,0 +1,26 @@
+第01章 HTML基础知识
+
+1.1 HTML和CSS进阶简介
+	1.1.1 你真的精通HTML和CSS吗
+		这里作者给出了一系列问题，我有一半都答不上来，也就说明别说精通CSS了，我连熟悉都算不上。
+	1.1.2 进阶教程简介
+		这本书是《Web前端开发精品课HTML和CSS基础教程》的姊妹篇，这一本属于进阶，上一本书是基础。
+	
+1.2 HTML、XHTML和HTML5
+	1.2.1 HTML和XHTML
+		HTML，全称 HyperText Mark-up Language（超文本标记语言）。
+		XHTML，全称 Extensible HyperText Mark-up Language（扩展的超文本标记语言）。
+		XHTML语法更加严格，要求标签闭合、标签属性小写，属性用引号，还有一点要注意，在 XHTML中，除了表单元素以外的所有元素，都应该用id而不是name。
+	1.2.2 HTML5
+		HTML5设计原则上化繁为简，文档类型说明简化为<!DOCTYPE html>，标签不区分大小写，允许属性不加引号，还允许部分属性的属性值省略。
+		可以缺省属性值的属性有：checked、readonly、defer、ismap、nohref、noshade、nowrap、selected、disabled、multiple、noresize（noresize="disabled"）。
+
+1.3 div和span
+	标签div和span是没有任何语义的，用来配合CSS定义元素样式。
+	
+1.4 id和class
+	对于页面关键结构，建议使用id；对于小地方，建议使用class。就算我们不需要对关键结构进行CSS操作或者JavaScript操作，也建议加上id，以便搜索引擎识别页面结构。
+
+1.5 浏览器标题栏小图标
+	<link rel="shortcut ico" type="image/x-icon" href="favicon.ico"/>
+	这里rel和type属性的取值为固定值，小图标格式是.ico。搜索“在线 ico”可以找到很多不错的图标制作工具。

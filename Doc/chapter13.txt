@@ -1,0 +1,90 @@
+第13章 CSS技巧
+
+13.1 水平居中
+	13.1.1 文字的水平居中
+		text-align:center;
+	13.1.2 元素的水平居中
+		1.块元素（block）
+			margin:0 auto;
+		2.行内元素（inline）和复合行内元素（inline-*）
+			复合行内元素包括：inline-block、inline-table以及inline-flex之类的元素。
+			text-align:center;
+
+13.2 垂直居中
+	13.2.1 文字的垂直居中
+		1.单行文字
+			height:100px;
+			line-height:100px;
+		2.多行文字
+			父元素
+			{
+				display:table-cell;
+				vertical-align:middle;
+			}
+			子元素{display:inline-block;}
+	13.2.2 元素的垂直居中
+		1.块元素（block）
+			父元素
+			{
+				position:relative;
+			}
+			子元素
+			{
+				position:absolute;
+				top:50%;
+				left:50%;
+				margin-top:"height值的一半的负值";
+				margin-left:"width值的一半的负值";
+			}
+		2.行内块元素（inline-block）
+			父元素
+			{
+				display:table-cell;
+				vertical-align:middle;
+			}
+			子元素{display:inline-block;}
+
+13.3 CSS Sprite
+	两款非常不错的工具：CSS Sprite Generator和Sprite Cow。
+	CSS Sprite Generator是一款在线工具，可以上传多个背景图的压缩包，然后工具会自动生成大背景图。此外，工具还可以自定义小背景图的位置、透明度和背景色等。
+	Sprite Cow可以自动生成“雪碧图”中某一个小背景图的CSS代码。
+	CSS Sprite Generator官方网址：http://css.spritegen.com
+	Sprite Cow官方网址：http://www.spritecow.com
+	需要注意一下几点：
+	(1) 在开发后期而不是前期使用CSS Sprite。
+	(2) 有条理的组织“雪碧图”。
+	(3) 控制“雪碧图”的大小。
+		据研究表明，如果图片的大小在200KB以内，则图片传输的时间是差不多的。对于大于200KB的“雪碧图”，我们应该根据类别分隔成多个“雪碧图”比较好。
+
+13.4 Icon Font图标
+	13.4.1 iconfont网站
+		iconfont是国内功能非常强大且图标内容很丰富的矢量图标库。它是由阿里巴巴体验团队倾力打造的一款集设计和前端开发的便捷工具。iconfont提供矢量图标下载、在线存储、格式转换等等。官方网址：http://www.iconfont.cn/。
+		从网站下载的文件中，有几个比较重要的：iconfont.eot、iconfont.svg、iconfont.ttf、iconfont.woff。
+		.eot 微软开发的用于嵌入页面的字体，IE专用字体格式
+		.woff W3C组织推荐的标准，Web字体最佳格式
+		.ttf Mac OS和Windows操作系统中最常见的字体格式
+		.svg W3C组织制定的开放标准的图形格式
+		使用的时候：
+		@font-face
+		{
+			font-family:"iconfont";
+			src:url("fonts/iconfont.eot"); /* IE9兼容模式*/
+			src:url("fonts/iconfont.eot?iefix") format("embedded-opentype"),
+				url("fonts/iconfont.woff") format("woff"),
+				url("fonts/iconfont.ttf") format("truetype"),
+				url("fonts/iconfont.svg") format("svg");
+			font-weight:normal;
+			font-style:normal;
+		}
+		.iconfont
+		{
+			font-family:"iconfont";
+			font-weight:normal;
+			font-style:normal;
+			-webkit-font-smoothing:antialiased;
+			-moz-osx-font-smoothing:grayscale;
+		}
+		“-webkit-font-smoothing:antialiased”用于webkit引擎浏览器中的抗锯齿，而“-moz-osx-font-smoothing:grayscale”用于Mac OSX Firefox浏览器中的抗锯齿。
+		iconfont网站下载下来的文件中有一个“demo.html”，我们点击进去可以看到每个图标都有对应一个字符串。
+		iconfont官网除了提供字体图标，还提供图标管理、WebFont技术等服务。
+		还可以访问国外最大的图标分享网站icomoon，官网https://icomoon.io/。

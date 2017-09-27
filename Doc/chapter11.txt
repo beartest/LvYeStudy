@@ -1,0 +1,20 @@
+第11章 CSS图形
+
+11.1 CSS图形简介
+	CSS实现的图形一般适合于展示，并不适合用于JavaScript动态操作。如果想要实现便于JavaScript操作的图形，使用canvas或SVG。
+
+11.2 三角形
+	11.2.1 CSS实现三角形的原理
+		使用border-color，将三条边的颜色设为transparent，可以呈现一个直角三角，指向可以为上、下、左、右。
+		使用border-color，将相邻两条边的颜色设为transparent，可以呈现一个直角三角，指向可以为左上、左下、右上、右下。
+	11.2.2 带边框的三角形
+		由两个三角形叠加形成带边框的三角形。
+		注意，在CSS中，子元素的绝对定位是根据父元素的“内容边界(content)”进行定位的。
+		这种实现冒泡框的方法，我认为不如Lea Verou的《CSS Secrets: Better Solutions to Everyday Web Design Problems》使用的方法好。
+
+11.3 圆
+	上半圆的实现：高度设为宽度的一半，左上角和右上角的圆角半径与元素高度一致。
+
+11.4 椭圆
+	border-radius:x/y;
+	x表示圆角的水平半径，y表示圆角的垂直半径。

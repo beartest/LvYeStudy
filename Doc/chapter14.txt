@@ -1,0 +1,92 @@
+第14章 重要概念
+
+14.1 CSS中的重要概念
+	包含块containing block。
+	BFC和IFC。
+	层叠上下文
+
+14.2 包含块
+	14.2.1 什么是包含块
+		包含块是视觉格式化模型中的一个重要概念，它与CSS盒子模型类似。包含块也可以理解为一个矩形盒子。一个元素的大小和定位往往是由该元素所在的包含块决定的。
+		“一个框的包含块”，指的是“该框所存在的那个包含块”，而不是它建造的包含块。
+		通常情况下，一个元素的包含块由离它最近的“块级祖先元素”的“内容边界”决定。但当元素被设置为绝对定位时，此时该元素的包含块是由离它最近的“position:relative”或“position:absolute”的祖先元素决定。
+		一个元素生成的盒子会扮演该元素的内部元素包含块的角色，也就是说，一个元素的CSS盒子为它的内部元素建造了包含块。
+	14.2.2 包含块的判定以及包含块的范围
+		1. 根元素
+			根元素（HTML元素），存在的包含块，被称为“初级包含块（initial containing block）”。
+		2. 固定定位元素
+			元素position为fixed的，它的包含块为当前可视窗口，也就是当前浏览器窗口。
+		3. 静态定位元素和相对定位元素
+			元素position为static或relative，它的包含块是它最近的块级祖先元素创建的。祖先元素必须是block、inline-block或者table-cell类型。
+		4. 绝对定位元素
+			元素position为absolute，包含块是离它最近的position不为static的祖先元素。
+			对于包含块的范围，我们分为两种情况考虑：
+			(1) 如果祖先元素是块元素，则包含块的范围为祖先元素的padding edge形成。
+			(2) 如果祖先元素是行内元素，则包含块取决于祖先元素的direction属性。具体范围判定比较复杂，参见http://www.w3help.org/zh-cn/kb/008/。
+
+14.3 层叠上下文
+	14.3.1 什么是层叠上下文
+		层叠上下文（stacking context）。
+		当一个元素具备以下任何一个条件，则该元素会创建一个新的层叠上下文：
+		(1) 根元素。
+		(2) z-index不为auto的定位元素。
+		根元素会创建“根层叠上下文”。除此之外，想要创建一个新的层叠上下文，也就只有一个途径了——z-index属性。
+	14.3.2 什么是层叠级别
+		层叠级别（stacking level）。
+		在同一个层叠上下文中，层叠级别从低到高排列：
+		(1) 背景和边框（父级）
+		(2) 负z-index
+		(3) 块盒子（布局）
+		(4) 浮动盒子（布局）
+		(5) 行内盒子（内容）
+		(6) z-index：0
+		(7) 正z-index
+		除了“背景和边框”这一条是当前层叠上下文之外，其他的都是针对当前层叠上下文内部的元素。
+		inline-block不是块盒子，而是行内盒子。
+	14.3.3 层叠上下文的特点
+		(1) 同一个层叠上下文中，我们比较的是“内部元素层叠级别”。层叠级别大的元素显示在上，层叠级别小的元素显示在下。
+		(2) 同一个层叠上下文中，如果两个元素的层叠级别相同（即z-index值相同），则后面的元素堆叠在前面元素的上面，遵循“后来者居上”原则。
+		(3) 不同的层叠上下文中，我们比较的是“父级元素层叠级别”元素显示顺序以“父级层叠上下文”的层叠级别来决定显示的先后顺序，与自身层叠级别无关。
+
+14.4 BFC和IFC
+	14.4.1 基本概念
+		1. 格式上下文（formatting context）
+			(1) 块级格式上下文（Block Formatting Context，BFC）
+			(2) 行级格式上下文（Inline Formatting Context，IFC）
+		2. 盒子（box）
+			块盒子，即block-level box。元素类型为block、table、list-item的元素，会生成块盒子，参与块级格式上下文（BFC）。
+			行内盒子，即inline-level box。元素类型为inline、inline-block、inline-table的元素，会生成行内盒子，参与行级格式上下文（IFC）。
+			除了block-level box和inline-level box这两种盒子，在CSS中还有一个run-in box盒子。不过run-in box是CSS3新增的。
+	14.4.2 什么是BFC
+		1.如何创建BFC
+			W3C标准中对BFC的定义：浮动元素，绝对定位元素（position为absolute或fixed），元素类型（display属性）为inline-block，table-block，table-cell，以及overflow属性不为visible的元素将会创建一个新的块级格式上下文（BFC）。
+			如果一个元素具备以下任何一个条件，则该元素都会创建一个新的BFC：
+			(1) 根元素。
+			(2) float属性除了none以外的值，也就是“float：left”和“float：right”。
+			(3) position属性除了static和relative以外的值，也就是“position:absolute”和“position:fixed”。
+			(4) overflow属性除了visible以外的值，也就是“overflow:auto”“overflow:hidden”和“overflow：scroll”。
+			(5) 元素类型（即display属性）为inline-block、table-caption、table-cell。
+			CSS3中的flex和inline-flex的元素也可以创建BFC。
+			上面说了，元素类型为block、table、list-item的元素，会生成块盒子，参与块级格式上下文（BFC）。注意这里是参与不是创建。
+		2. BFC的特点
+			W3C标准描述BFC的特点共有两条：
+			(1) 在一个BFC中，盒子从顶端开始垂直一个接着一个地排列，两个相邻盒子之间的垂直距离由margin属性决定。在同一个BFC中，两个相邻块盒子之间垂直方向上的外边距会叠加。
+			(2) 在一个BFC中，每个盒子的左外边界（margin-left）会紧贴着容器的左边（border-left）（对于从右到左的格式化，则相反），即使存在浮动元素也是如此。
+			从上面W3C标准定义，可以得到以下几点重要结论：（这里非常重要）
+			(1) 在一个BFC内部，盒子会在垂直方向上一个接一个地排列。
+			(2) 在一个BFC内部，相邻的margin-top和margin-bottom会叠加。
+			(3) 在一个BFC内部，每个元素的左外边界会紧贴着包含盒子左边，即使存在浮动也是如此。
+			(4) 在一个BFC内部，如果存在内部元素是一个新的BFC，并且存在内部元素是浮动元素。则该BFC的区域不会与float元素的区域重叠。
+			(5) BFC就是页面上的一个隔离的盒子，该盒子内部的子元素不会影响到外面的元素。
+			(6) 计算一个BFC的高度时，其内部的浮动元素的高度也要参与计算。
+	14.4.3 BFC的用途
+		BFC的用途很多，常见的有三个：
+		1. 创建BFC来避免垂直外边距叠加。
+			A和B两个元素发生外边距叠加，可以给B添加一个父元素，设置父元素“overflow:hidden”来创建一个BFC，这样A和B就不在同一个BFC下，避免了外边距叠加。
+		2. 创建BFC来清除浮动。
+			(1) BFC包含浮动。
+				根据上面第六条“计算一个BFC的高度时，其内部的浮动元素的高度也要参与计算”，使用给父元素添加“overflow:hidden”来清浮动。
+			(2) BFC避免文字环绕
+				根据上面第四条“在一个BFC内部，如果存在内部元素是一个新的BFC，并且存在内部元素是浮动元素。则该BFC的区域不会与float元素的区域重叠”，使用给文字元素添加“overflow:hidden”来避免和float的图片发生环绕。
+		3. 创建BFC来实现自适应布局。
+			根据上面第三条“在一个BFC内部，每个元素的左外边界会紧贴着包含盒子左边，即使存在浮动也是如此”，创建左边“float:left”，右边“overflow:hidden”的自适应布局。

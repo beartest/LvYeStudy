@@ -1,0 +1,30 @@
+第09章 浮动布局
+
+9.1 正常文档流
+
+9.2 深入浮动
+	当一个元素定义了“float：left”或“float：right”时，不管这个元素之前是inline、inline-block或者其他类型，都会变为block类型。
+
+9.3 浮动的影响
+	如果一个元素是浮动元素（没有定义height），并且它的子元素也是浮动元素，则这个浮动元素会自适应地包含该子元素。
+
+9.4 浮动的负作用
+
+9.5 清除浮动
+	在CSS中，常见的清除浮动的方法有三种：
+	(1) clear:both
+	(2) overflow:hidden
+	(3) ::after伪元素
+	clear属性不是应用于浮动元素本身，而是应用于浮动元素后面的元素。
+	“overflow:hidden”应用于浮动元素的父元素。
+	在实际开发中，比较好的解决方案是使用“::after伪元素”结合“clear:both”来实现。推荐把这种方法定义为公共类，然后进行全局引用，以便减少CSS代码。
+	.clearfix{*zoom:1}
+	.clearfix::after
+	{
+		clear:both;
+		content:"";
+		display:block;
+		height:0;
+		visibility:hidden;
+	}
+	"clear:both"清除浮动会增加多余标签，“overflow:hidden”清除浮动会使得超出父元素部分隐藏。但是使用::after伪元素来清除浮动，都不会有这些缺点。

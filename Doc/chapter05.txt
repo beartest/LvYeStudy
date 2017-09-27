@@ -1,0 +1,51 @@
+第05章 盒子模型
+
+5.1 CSS盒子模型
+	1. 内容区
+		内容区有三个属性：width，height和overflow。
+	2. 内边距
+		共五个属性：padding-top、padding-bottom、padding-left、padding-righ和简洁属性padding。
+	3. 边框
+		border-width、border-style、border-color和简洁属性border。
+	4. 外边距
+		共五个属性：margin-top、margin-bottom、margin-left、margin-righ和简洁属性margin。
+
+5.2 深入border
+	“border:0”和“border:none”的区别主要体现在两点：性能差异和兼容差异。
+	5.2.1 性能差异
+		“border:0”仍然要进行渲染，需要占用内存；“border:none”不需要占用内存。
+	5.2.2 兼容差异
+		兼容差异只存在于IE6和IE7的<input type="button"/>标签及<button>标签中，其他浏览器不存在兼容问题。
+	在实际开发中经过测试，两者在性能方面对页面渲染速度的差异并不大。
+	
+5.3 深入padding
+	“背景图片+padding”可以实现一些图文伴随的情况。
+
+5.4 外边距叠加
+	5.4.1 外边距叠加的三种情况
+		当一个空元素有上下外边距时，如果没有border或者padding，则元素的上外边距与下外边距会发生合并。
+		空元素，值得是没有子元素或者没有文本内容的元素，例如<br/>、<hr/>等。
+		需要注意一下几点：
+		(1) 水平外边距永远不会有叠加。
+		(2) 垂直外边距只在同级元素、父子元素和空元素这三种情况下叠加。
+		(3) 外边距叠加之后的外边距高度等于发生叠加之前的两个外边距中的最大值。
+		(4) 外边距叠加针对的是block以及inline-block元素，不包括inline元素。因为inline元素的margin-top和margin-bottom设置无效。
+	5.4.2 外边距叠加的意义
+		CSS定义外边距叠加的初衷就是为了更好地对文章进行排版。
+		在实际开发中，最好统一使用margin-top或margin-bottom，不要混合使用，从而降低出现外边距叠加问题的风险。
+		外边距叠加的原理和BFC（块级格式上下文）有着密切的关系。
+
+5.5 负margin技术
+	5.5.1 负margin简介
+	5.5.2 负margin技巧
+		1. 图片与文字对齐
+			图片与文字默认是基线对齐（vertical-align:baseline）。如果想要实现图片和文字底部水平方向对齐，除了使用“vertical-align:text-bottom”这个方法之外，还可以使用兼容性比较好的负margin来实现。
+			“margin{0 3px -3px 0}”可以看成一条公式般的东西。
+		2. 自适应两列布局
+		3. 元素垂直居中
+		4. tab选项卡
+			关键是使用“margin-top:-1px”来解决选项卡下边框显示问题。
+
+5.6 overflow
+	属性值：visible、hidden、scroll、auto。
+	使用clear属性来清楚浮动的缺点是增加一个多余的标签，而使用“overflow: hidden”清除浮动则不需要。

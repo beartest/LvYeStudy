@@ -1,0 +1,51 @@
+第07章 文本效果
+
+7.1 文本效果简介
+	text-decoration 下划线、删除线、丁划线
+	text-transform 文本大小写
+	font-variant 将英文文本转换为“小型”大写字母
+	text-indent 段落首行缩进
+	text-align 文本水平对齐
+	vertical-align 文本垂直对齐
+	line-height 行高
+	letter-spacing 字距
+	word-spacing 词距
+	
+7.2 深入text-indent
+	“text-indent:-9999px”一般用于LOGO部分。在搜索引擎优化中，h1是非常重要的标签，一般情况下，我们都是把网站的LOGO图片放到h1标签中。
+	因为没有哪台电脑的屏幕宽度大于9999px，所以缩进的文字一定不可见。
+	
+7.3 深入text-align
+	text-align取值除了left，right，还有justify（两端对齐）。
+	7.3.1 text-align起作用的元素
+		text-align对文字、inline元素以及inline-block元素起作用，但对block元素不起作用。
+	7.3.2 “text-align:center;”与“margin:0 auto;”的区别
+		“text-align:center;”实现的是文字、inline元素以及inline-block元素的水平居中。
+		“margin:0 auto;”实现的是block元素的水平居中。
+		“text-align:center;”在父元素中定义，“margin:0 auto;”在当前元素中定义。
+		
+7.4 深入line-height
+	7.4.1 line-height的定义
+		英文薄有四条线：顶线top、中线middle、基线baseline、底线bottom。
+		行高line-height，指的是两条极限之间的垂直距离。
+		行距，指的是上一行底线到下一行顶线的垂直距离。
+		半行距，指的是行距的一半。
+		内容区，指的是行盒子顶线到底线之间的垂直距离。
+		行框，指的是两行文字“行半距分割线”之间的垂直距离。
+	7.4.2 line-height的取值
+		在CSS中，我们可以定义height和line-height这两个属性值相等，从而来实现单行文本的垂直居中。
+		当line-height值为百分比或者em值时，当前元素的行高是相对于父元素的font-size值来计算的。
+		line-height = (父元素font-size) * (百分比)
+		line-height = (父元素font-size) * (em值)
+		line-height还支持无单位数字的属性取值，在CSS中也只有line-height属性具有这个特点。
+		line-height = (当前元素font-size) * (无单位数字)
+		这个无单位数字可以理解为一个系数。子元素继承的是父元素的系数，不会直接继承父元素的line-height。
+		
+7.5 深入vertical-align
+	7.5.1 vertical-align属性取值
+		vertical-align属性取值有三种情况：负值、百分比和关键字。
+		vertical-align属性取值为百分比时，这个百分比时相对于当前元素所继承的line-height属性值决定的。
+		vertical-aligh属性取值为关键字，常见的top、middle、baseline、bottom，还可以为text-top、text-bottom、super、sub等关键字。
+	7.5.2 vertical-align属性应用
+		vertical-align属性对inline元素、inline-block元素和table-cell元素有效，对块元素无效。
+		

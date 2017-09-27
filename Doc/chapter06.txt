@@ -1,0 +1,31 @@
+第06章 display属性
+
+6.1 块元素和行内元素
+	行内元素内部可以容纳其他行内元素，但不可以容纳块元素，不然会出现无法预知的效果。
+	行内元素无法定义height，也无法定义width。
+	行内元素可以定义margin-left和margin-right，无法定义margin-top和margin-bottom。
+
+6.2 display简介
+	display属性取值：inline、block、inline-block、table、table-row、table-cell、none。还有list-item、run-in、compact等属性，不过极少用到。
+	display:inline-block可以将元素转化为行内块元素，就可以定义width和height了。
+	在HTML中常见的inline-block元素有两个：img元素和input元素。
+	对于块元素，IE6和IE7不能识别“display:inline-block”，加不加对它们都没有任何影响。解决方法是：在IE6和IE7中用“*display:inline;*zoom:1;”来替代“display:inline-block”。对于行内元素，则不存在兼容问题。
+	
+6.3 display:none
+	6.3.1 display:none简介
+		“display:none”不推荐用来隐藏一些对SEO关键的部分。因为对于搜索引擎来说，它会直接忽略“display:none”隐藏的内容，不把“display:none”隐藏内容加入权重考虑。
+	6.3.2 “display:none”和“visibility:hidden”区别
+		“display:none”不占据原来的位置，“visibility:hidden”依然占据原来的位置。
+
+6.4 display:table-cell
+	IE6/IE7不支持该属性值。
+	“display:table-cell”非常强大，可以实现以下三种功能。
+	6.4.1 图片垂直居中于元素。
+		图片的水平居中可以使用“text-align:center”来实现，而图片的垂直居中效果可以使用“display:table-cell”和“vertical-align:center”配合来实现。
+	6.4.2 等高布局
+		给父元素添加“display:table-row”，实现其中“display:table-cell”的自适应等高布局。
+	6.4.3 自动平均划分元素
+		给父元素定义“display:table”而子元素定义“display:table-cell”时，如果给父元素一定的宽度，父元素宽度就回根据子元素的个数进行自动平均划分。
+
+6.5 去除inline-block元素间距
+	在CSS中，如果想要去除inline-block元素的间距，我们可以使用“font-size:0”来去除inline-block元素的间距。还可以使用负margin、letter-spacing、word-spacing等方法来实现。
